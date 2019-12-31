@@ -1,0 +1,44 @@
+---
+title: "Montana Climate Office Data Hub"
+self_contained: true
+output: 
+  flexdashboard::flex_dashboard:
+    self_contained: true
+    theme: readable
+    navbar:
+      - { title: "MCO GitHub", href: "https://github.com/mt-climate-office", align: right }
+    vertical_layout: scroll
+    includes:
+      after_body: footer.html
+---
+
+Inputs {.sidebar}
+-------------------------------------
+
+<img src="https://climate.umt.edu/imx/MCO_logo.svg" width="100%">
+
+## Climate Data Hub
+
+###
+
+#### **Welcome to the Montana Climate Office data hub.**
+ <font size="3">
+Here you will find climate data products distributed by the Montana Climate Office. These data are in raster form (GeoTIFFs).
+The Montana Climate Office is committed to serving Montanans with up-to-date, easy to access climatological information and resources. The public may use this site to search for and download climate information. Please see the Montana Climate Office website (https://climate.umt.edu) for additional details on these datasets and the Montana Climate Office.
+ </font>
+ 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+#### 	**DOWNLOAD DATA HERE:**
+***
+**Precipitation data [here](https://mco.cfc.umt.edu/datasets/data/precipitation/)**
+
+**Temperature data [here](https://mco.cfc.umt.edu/datasets/data/temperature/)**
+</div>
+###
+
+ <font size="1">
+*This computer system is the property of the State of Montana. Unauthorized use is a violation of 45-6-311, MCA. This computer system, including all related equipment, networks, and network devices, is provided only for authorized state government use. Any or all uses of this system and all files on this system may be intercepted, monitored, recorded, copied, audited, inspected, and disclosed to authorized personnel. By using this system, the user consents to such interception, monitoring, recording, copying, auditing, inspection, and disclosure at the discretion of authorized personnel. Unauthorized or improper use of this system may result in administrative disciplinary action and civil and criminal penalties. By continuing to use this system you indicate your awareness of and consent to these terms and conditions of use. Log Off immediately if you do not agree to the conditions stated in this warning.*
+</font>
