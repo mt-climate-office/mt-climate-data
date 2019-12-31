@@ -7,7 +7,7 @@ library(spdplyr)
 library(doParallel)
 
 #define write directory
-write.dir = "~/mt-climate-data/data/precipitation/annual_sum/"
+write.dir = "~/mt-climate-data/data/precipitation/annual_precipitation/"
 
 #import state shp file for clipping
 mt = read_sf("~/mt-climate-data/shp/states/states.shp")%>%
@@ -42,7 +42,7 @@ annual_precip = foreach(i=1:length(years)) %dopar% {
 
 #export indivitual years
 for(i in 1:length(years)){
-  writeRaster(annual_precip[[i]], paste0(write.dir,"annual_precipitation_mm_",years[i],".tif"))
+  writeRaster(annual_precip[[i]], paste0(write.dir,"annual_sum_precipitation_mm_",years[i],".tif"))
 }
 
 #redefine as a brick (easier to index for climatology)
@@ -52,7 +52,7 @@ annual_precip = brick(annual_precip)
 climatology = mean(annual_precip[[which(years == 1981):which(years == 2010)]])
 
 #write climatology raster
-writeRaster(climatology, paste0(write.dir,"mean_annual_precipitation_mm_1981-2010.tif"))              
+writeRaster(climatology, paste0(write.dir,"mean_annual_sum_precipitation_mm_1981-2010.tif"))              
 
 #stop parallel cluster backend
 stopCluster(cl)
