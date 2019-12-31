@@ -49,7 +49,7 @@ annual_precip = brick(annual_precip)
 climatology = mean(annual_precip[[which(years == 1981):which(years == 2010)]])
 
 #write climatology raster
-writeRaster(climatology, paste0(write.dir,"mean_precipitation_mm_1981-2010.tif"))              
+writeRaster(climatology, paste0(write.dir,"mean_annual_precipitation_mm_1981-2010.tif"))              
 
 #stop parallel cluster backend
 stopCluster(cl)
