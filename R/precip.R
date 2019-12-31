@@ -13,7 +13,7 @@ write.dir = "~/mt-climate-data/data/precipitation/annual_sum/"
 mt = read_sf("~/mt-climate-data/shp/states/states.shp")%>%
   filter(STATE_ABBR == "MT")
 
-#import gridMET precip and mask to MT
+#import gridMET precip and mask to MT (Abatzoglou, 2013)
 precip = brick("http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_pr_1979_CurrentYear_CONUS.nc", 
                var= "precipitation_amount") %>%
   crop(., extent(mt)) %>%
