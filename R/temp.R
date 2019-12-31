@@ -20,6 +20,9 @@ min_temp = brick("http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_m
   crop(., extent(mt)) %>%
   mask(., mt)
 
+#define proj4string
+crs(min_temp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
+
 #calculate vector of time
 time = data.frame(datetime = as.Date(as.numeric(substring(names(min_temp),2)), origin="1900-01-01"))%>%
   mutate(day = strftime(datetime,"%m-%d"))%>%
@@ -32,6 +35,9 @@ registerDoParallel(cl)
 #years of interest
 years = c(1979:2018)
 
+#test
+annual = mean(min_temp[[which(time$year == years[1])]])
+
 #calculate the mean annual min temp in parellel (by years)
 annual_min_temp = foreach(i=1:length(years)) %dopar% {
   years = c(1979:2018)
@@ -40,7 +46,7 @@ annual_min_temp = foreach(i=1:length(years)) %dopar% {
 
 #write out data
 for(i in 1:length(years)){
-  writeRaster(annual_min_temp[[i]], paste0(write.dir,"mean_annual_min_temp_degrees_K_",years[i],".tif"))
+  writeRaster(annual_min_temp[[i]], paste0(write.dir,"mean_annual_min_temp_degrees_K_",years[i],".tif"), overwrite=TRUE)
 }
 
 #reorganize into a brick mainly for ease of indexing
@@ -58,6 +64,9 @@ max_temp = brick("http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_m
   
   crop(., extent(mt)) %>%
   mask(., mt)
+
+#define proj4string
+crs(max_temp) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
 
 #compute time (incase there are any differences)
 time = data.frame(datetime = as.Date(as.numeric(substring(names(max_temp),2)), origin="1900-01-01"))%>%

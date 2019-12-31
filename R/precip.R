@@ -19,6 +19,9 @@ precip = brick("http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met
   crop(., extent(mt)) %>%
   mask(., mt)
 
+#define proj4string
+crs(precip) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
+
 #compute time
 time = data.frame(datetime = as.Date(as.numeric(substring(names(precip),2)), origin="1900-01-01"))%>%
   mutate(day = strftime(datetime,"%m-%d"))%>%
