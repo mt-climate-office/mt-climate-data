@@ -31,11 +31,21 @@ The Montana Climate Office is committed to serving Montanans with up-to-date, ea
 div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
 <div class = "blue">
-#### 	**DOWNLOAD DATA HERE:**
+#### 	**DOWNLOAD GRIDDED DATA HERE:**
 ***
 **Precipitation data [here](https://mco.cfc.umt.edu/datasets/data/precipitation/)**
 
 **Temperature data [here](https://mco.cfc.umt.edu/datasets/data/temperature/)**
+</div>
+
+<style>
+div.green { background-color:#e6ffea; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "green">
+#### 	**DOWNLOAD TIME SERIES DATA HERE:**
+***
+**Precipitation data [here](https://montana-climate-office-hoylman.shinyapps.io/get_precip/)**
+
 </div>
 ###
 
