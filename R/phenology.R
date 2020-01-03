@@ -7,7 +7,7 @@ library(spdplyr)
 library(doParallel)
 
 #define write dir
-write.dir = "~/mt-climate-data/data/temperature/mean_annual_min/"
+write.dir = "~/mt-climate-data/data/growing_degree_days/base_50_degrees_F/"
 
 #import states shp file for clipping
 mt = read_sf("~/mt-climate-data/shp/states/states.shp")%>%
@@ -45,19 +45,46 @@ time_max_temp = data.frame(datetime = as.Date(as.numeric(substring(names(max_tem
 #make sure time series are the same
 all.equal(time_min_temp, time_max_temp)
 
-#calculate mean for daily average temp (NDAWN approach; https://ndawn.ndsu.nodak.edu/help-corn-growing-degree-days.html)
+#convert min temp form kelvin to F
+max_temp_F = ((max_temp - 273.15) * (9/5) + 32)
+#set max value for growing degree day (GDD) calculation 
+max_temp_F[max_temp_F > 86] = 86
+max_temp_F[max_temp_F < 50] = 50
+
+#convert max temp form kelvin to F
+min_temp_F = ((min_temp - 273.15) * (9/5) + 32)
+#set min value for growing degree day (GDD) calculation 
+min_temp_F[min_temp_F < 50] = 50
+ 
+#set up paralell back end
 cl = makeCluster(detectCores()-1)
 registerDoParallel(cl)
 
-mean_temp = foreach(i=1:nlayers(max_temp)) %dopar% {
-  mean(max_temp[[i]], min_temp[[i]])
+#calcualte growing degree day
+GDD = list()
+GDD = foreach(i=1:nlayers(max_temp)) %dopar% {
+  sum(mean(max_temp_F[[i]], min_temp_F[[i]]) - 50)
 }
 
-mean_temp = brick(mean_temp)
+GDD = brick(GDD)
 
-#temp degree F
-mean_temp_F = (mean_temp - 273.15) * (9/5) + 32
+annual_GDD = foreach(i=1:length(years)) %dopar% {
+  years = c(1979:2018)
+  sum(GDD[[which(time_max_temp$year == years[i])]], na.rm = T)
+}
 
-#Corn Growing Degree Days (times greater then 10 C, 50 C)
+#write rasters
+for(i in 1:length(years)){
+  writeRaster(annual_GDD[[i]], paste0(write.dir,"annual_growing_degree_days_",years[i],".tif"))
+}
 
+#reorginize into a brick
+annual_GDD = brick(annual_GDD)
 
+#compute climatology
+climatology = mean(annual_GDD[[which(years == 1981):which(years == 2010)]])
+
+#write climatology
+writeRaster(climatology, paste0(write.dir,"mean_annual_growing_degree_days_1981-2010.tif"))  
+
+stopCluster(cl)

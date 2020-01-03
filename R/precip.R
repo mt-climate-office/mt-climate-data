@@ -31,7 +31,7 @@ time = data.frame(datetime = as.Date(as.numeric(substring(names(precip),2)), ori
 years = c(1979:2018)
 
 #start cluster for parellel computing
-cl = makeCluster(detectCores()-1)
+cl = makeCluster(20)
 registerDoParallel(cl)
 
 #sum and mask precip in parellel
@@ -53,6 +53,31 @@ climatology = mean(annual_precip[[which(years == 1981):which(years == 2010)]])
 
 #write climatology raster
 writeRaster(climatology, paste0(write.dir,"mean_annual_sum_precipitation_mm_1981-2010.tif"))              
+
+#calculate binary precip grids
+precip[precip>0] = 1
+
+#sum and mask precip in parellel
+precip_freq = foreach(i=1:length(years)) %dopar% {
+  years = c(1979:2018)
+  annual = sum(precip[[which(time$year == years[i])]])
+}
+
+write.dir = "~/mt-climate-data/data/precipitation/annual_precipitation_frequency/"
+
+#export indivitual years
+for(i in 1:length(years)){
+  writeRaster(precip_freq[[i]], paste0(write.dir,"annual_precipitation_frequency_days_",years[i],".tif"))
+}
+
+#redefine as a brick (easier to index for climatology)
+precip_freq = brick(precip_freq)
+
+#compute 1981-2010 climatology
+climatology = mean(precip_freq[[which(years == 1981):which(years == 2010)]])
+
+#write climatology raster
+writeRaster(climatology, paste0(write.dir,"annual_precipitation_frequency_days_1981-2010.tif"))              
 
 #stop parallel cluster backend
 stopCluster(cl)
