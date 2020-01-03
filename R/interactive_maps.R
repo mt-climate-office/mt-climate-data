@@ -45,14 +45,15 @@ precip_map = base_map %>%
   leaflet::addRasterImage(precip_freq, colors = pal_freq, opacity = 0.7,group = "Frequency", project = T) %>%
   addLegend(pal = pal, values = 5:110,
             title = paste0("<center>Average<br>Precipitation<br>(in)<br><center/>"),
-            position = "bottomleft", group = "Average")%>%
+            position = "bottomright", group = "Average")%>%
   addLegend(pal = pal_freq, values = 85:265,
             title = paste0("<center>Average<br>Precipitation<br>Frequency (days)<br><center/>"),
-            position = "bottomleft", group = "Frequency")%>%
-  addLayersControl(position = "topright",
+            position = "bottomright", group = "Frequency")%>%
+  addLayersControl(position = "topleft",
                    overlayGroups = c("Average", "Frequency"),
                    options = layersControlOptions(collapsed = FALSE))%>%
-  leaflet::hideGroup("Frequency")
+  leaflet::hideGroup("Frequency")%>%
+  addFullscreenControl()
 
 precip_map
 
@@ -85,25 +86,26 @@ temp_map = base_map %>%
   leaflet::addRasterImage(days_above_90, colors = pal_days, opacity = 0.7,group = "Mean Annual Days above 90°F", project = T) %>%
   addLegend(pal = pal_mean, values = 24:51,
             title = paste0("<center>Mean Annual<br>Temperature (°F)<br><center/>"),
-            position = "bottomleft", group = "Mean Annual Temp")%>%
+            position = "bottomright", group = "Mean Annual Temp")%>%
   
   addLegend(pal = pal_min, values = 13:39,
             title = paste0("<center>Mean Annual<br>Minimum<br>Temperature (°F)<br><center/>"),
-            position = "bottomleft", group = "Mean Annual Min Temp")%>%
+            position = "bottomright", group = "Mean Annual Min Temp")%>%
   
   addLegend(pal = pal_max, values = 35:64,
             title = paste0("<center>Mean Annual<br>Maximum<br>Temperature (°F)<br><center/>"),
-            position = "bottomleft", group = "Mean Annual Max Temp")%>%
+            position = "bottomright", group = "Mean Annual Max Temp")%>%
   
   addLegend(pal = pal_days, values = 0:51,
             title = paste0("<center>Mean Annual<br>Days Above 90°F<br><center/>"),
-            position = "bottomleft", group = "Mean Annual Days above 90°F")%>%
+            position = "bottomright", group = "Mean Annual Days above 90°F")%>%
   
-  addLayersControl(position = "topright",
+  addLayersControl(position = "topleft",
                    overlayGroups = c("Mean Annual Temp", "Mean Annual Min Temp",
                                      "Mean Annual Max Temp", "Mean Annual Days above 90°F"),
                    options = layersControlOptions(collapsed = FALSE))%>%
-  leaflet::hideGroup(c("Mean Annual Min Temp","Mean Annual Max Temp", "Mean Annual Days above 90°F"))
+  leaflet::hideGroup(c("Mean Annual Min Temp","Mean Annual Max Temp", "Mean Annual Days above 90°F"))%>%
+  addFullscreenControl()
   
 
 temp_map
@@ -122,10 +124,12 @@ GGD_map = base_map %>%
   leaflet::addRasterImage(GDD, colors = pal_GDD, opacity = 0.7,group = "Mean Annual Growing Degree Days", project = T) %>%
   addLegend(pal = pal_GDD, values = 343:3220,
             title = paste0("<center>Mean Annual<br>Growing Degree Days<br><center/>"),
-            position = "bottomleft", group = "Mean Annual Growing Degree Days")%>%
-  addLayersControl(position = "topright",
+            position = "bottomright", group = "Mean Annual Growing Degree Days")%>%
+  addLayersControl(position = "topleft",
                    overlayGroups = c("Mean Annual Growing Degree Days"),
-                   options = layersControlOptions(collapsed = FALSE))
+                   options = layersControlOptions(collapsed = FALSE)) %>%
+  addFullscreenControl()
+
 GGD_map
 
 htmlwidgets::saveWidget(GGD_map, "~/mt-climate-data/maps/GGD_map.html", selfcontained = T)
