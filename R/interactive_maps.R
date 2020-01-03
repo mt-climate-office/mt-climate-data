@@ -49,7 +49,7 @@ precip_map = base_map %>%
   addLegend(pal = pal_freq, values = 85:265,
             title = paste0("<center>Average<br>Precipitation<br>Frequency (days)<br><center/>"),
             position = "bottomleft", group = "Frequency")%>%
-  addLayersControl(position = "topleft",
+  addLayersControl(position = "topright",
                    overlayGroups = c("Average", "Frequency"),
                    options = layersControlOptions(collapsed = FALSE))%>%
   leaflet::hideGroup("Frequency")
@@ -99,7 +99,7 @@ temp_map = base_map %>%
             title = paste0("<center>Mean Annual<br>Days Above 90°F<br><center/>"),
             position = "bottomleft", group = "Mean Annual Days above 90°F")%>%
   
-  addLayersControl(position = "topleft",
+  addLayersControl(position = "topright",
                    overlayGroups = c("Mean Annual Temp", "Mean Annual Min Temp",
                                      "Mean Annual Max Temp", "Mean Annual Days above 90°F"),
                    options = layersControlOptions(collapsed = FALSE))%>%
@@ -119,11 +119,11 @@ pal_GDD = colorBin(colorRamp(rev(c("#8b0000", "#ff0000", "#ffff00", "#00ff00", "
                    domain = 343:3220, bins = round(seq(343,3220,length.out = 10),0), na.color = "transparent")
 
 GGD_map = base_map %>%
-  leaflet::addRasterImage(GDD, colors = pal_GDD, opacity = 0.7,group = "Mean AnnualGrowing Degree Days", project = T) %>%
+  leaflet::addRasterImage(GDD, colors = pal_GDD, opacity = 0.7,group = "Mean Annual Growing Degree Days", project = T) %>%
   addLegend(pal = pal_GDD, values = 343:3220,
             title = paste0("<center>Mean Annual<br>Growing Degree Days<br><center/>"),
             position = "bottomleft", group = "Mean Annual Growing Degree Days")%>%
-  addLayersControl(position = "topleft",
+  addLayersControl(position = "topright",
                    overlayGroups = c("Mean Annual Growing Degree Days"),
                    options = layersControlOptions(collapsed = FALSE))
 GGD_map
