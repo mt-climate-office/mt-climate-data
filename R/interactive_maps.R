@@ -132,4 +132,4 @@ GGD_map = base_map %>%
 
 GGD_map
 
-htmlwidgets::saveWidget(GGD_map, "~/mt-climate-data/maps/GGD_map.html", selfcontained = T)
+htmlwidgets::saveWidget(GGD_map, "~/mt-climate-data/maps/GDD_map.html", selfcontained = T)
