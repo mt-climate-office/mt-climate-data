@@ -7,14 +7,22 @@ library(scales)
 library(shiny)
 library(leaflet)
 library(leaflet.extras)
+library(tableHTML)
 
 input_options = data.frame(urls = c("http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_pr_1979_CurrentYear_CONUS.nc",
                                     "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_tmmx_1979_CurrentYear_CONUS.nc",
-                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_vpd_1979_CurrentYear_CONUS.nc"),
-                           summary = c("sum", "mean", "mean"),
-                           names = c("Precipitation", "Maximum Temperature", "Vapor Pressure Deficit"),
-                           units = c("mm", "°C", "kPa"),
-                           short_name = c("precip", "max_temp", "vpd"))
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_tmmn_1979_CurrentYear_CONUS.nc",
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_vpd_1979_CurrentYear_CONUS.nc",
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_srad_1979_CurrentYear_CONUS.nc",
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_vs_1979_CurrentYear_CONUS.nc",
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_th_1979_CurrentYear_CONUS.nc",
+                                    "http://thredds.northwestknowledge.net:8080/thredds/dodsC/agg_met_pet_1979_CurrentYear_CONUS.nc"),
+                           summary = c("sum", "mean", "mean", "mean", "mean", "mean", "mean", "sum"),
+                           names = c("Precipitation", "Maximum Temperature", "Minimum Temperature",
+                                     "Vapor Pressure Deficit", "Surface Radiation", "Wind Velocity",
+                                     "Wind Direction", "Potential ET"),
+                           units = c("mm", "°C", "°C", "kPa", "W/m2", "m/s","degrees_clockwise_from_N", "mm"),
+                           short_name = c("precip", "max_temp", "min_temp", "vpd", "srad", "wind_velocity", "wind_direction","PET"))
 
 #to dos!
 #start time, end time
@@ -105,16 +113,40 @@ shinyApp(ui <- fluidPage(
   verticalLayout(),
   # first we want to display the map
   leafletOutput("mymap", height = 600),
+  helpText("Welcome to the Montana Climate Office, time series download tool. This app will allow you to download
+           data from the gridMET dataset (Abatzoglou, 2013). Choose a variable from the dropdown menu below the map
+           and drop a pin on the map within the Continental United States. Once complete you can downlaod the data
+           in csv format below using the download buttons. These data are available in daily or monthly timesteps.
+           For any questions please contact state.climatologist@umontana.edu."),
   selectInput("variable", "Choose a Variable:",
               #cant figure out how to soft code this.....
               c("Precipitation" = 1,
                 "Maximum Temperature" = 2,
-                "Vapor Pressure Deficit" = 3),
+                "Minimum Temperature" = 3,
+                "Vapor Pressure Deficit" = 4,
+                "Surface Radiation" = 5,
+                "Wind Velocity" = 6,
+                "Wind Direction" = 7,
+                "Potential ET" = 8),
               selected = "Precipitation"),
   # add in a conditional message for when calculations are running. 
+  tags$head(tags$style(type="text/css", "
+                                  #loadmessage {
+                                  position: fixed;
+                                  top: 0px;
+                                  left: 0px;
+                                  width: 100%;
+                                  padding: 5px 0px 5px 0px;
+                                  text-align: center;
+                                  font-weight: bold;
+                                  font-size: 100%;
+                                  color: #ffffff;
+                                  background-color: #003366;
+                                  z-index: 105;
+                                  }
+                                  ")),
   conditionalPanel(condition="$('html').hasClass('shiny-busy')",
-                   tags$div("Calculating Climatology...",
-                            id="loadmessage")),
+                   tags$div("Calculating Climatology...",id="loadmessage")),
   # display our precip plot
   plotOutput("plot", width = "100%", height = "400px"),
   # set up download buttons for the user to download data
@@ -140,7 +172,7 @@ server <- function(input, output, session) {
                                      polylineOptions = FALSE, polygonOptions = FALSE,
                                      circleOptions = FALSE, rectangleOptions = FALSE,
                                      circleMarkerOptions = FALSE, editOptions = FALSE,
-                                     singleFeature = FALSE, targetGroup='draw')
+                                     singleFeature = TRUE, targetGroup='draw')
   })
   
   # Now for our reactive portion which is when the user drops a pin on the map
