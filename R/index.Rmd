@@ -7,15 +7,49 @@ output:
     theme: readable
     navbar:
       - { title: "MCO GitHub", href: "https://github.com/mt-climate-office", align: right }
-    vertical_layout: scroll
+    orientation: rows
     includes:
       after_body: footer.html
 ---
 
-Inputs {.sidebar}
+Inputs {.sidebar data-width=350}
 -------------------------------------
 
 <img src="https://climate.umt.edu/imx/MCO_logo.svg" width="100%">
+
+***
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+<center>
+### 	**DOWNLOAD GRIDDED DATA HERE:**
+</center>
+
+***
+**Precipitation data [here](https://mco.cfc.umt.edu/datasets/data/precipitation/)**
+
+**Temperature data [here](https://mco.cfc.umt.edu/datasets/data/temperature/)**
+
+**Phenology data [here](https://mco.cfc.umt.edu/datasets/data/growing_degree_days/)**
+</div>
+
+<style>
+div.green { background-color:#e6ffea; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "green">
+
+<center>
+### 	**DOWNLOAD TIME SERIES DATA HERE:**
+</center>
+***
+**Precipitation data [here](https://montana-climate-office-hoylman.shinyapps.io/get_precip/)**
+
+**Mesonet API [here](https://mesonet.climate.umt.edu/api/)**
+
+</div>
 
 ## Climate Data Hub
 
@@ -26,27 +60,26 @@ Inputs {.sidebar}
 Here you will find climate data products distributed by the Montana Climate Office. These data are in raster form (GeoTIFFs).
 The Montana Climate Office is committed to serving Montanans with up-to-date, easy to access climatological information and resources. The public may use this site to search for and download climate information. Please see the Montana Climate Office website (https://climate.umt.edu) for additional details on these datasets and the Montana Climate Office.
  </font>
- 
-<style>
-div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
-</style>
-<div class = "blue">
-#### 	**DOWNLOAD GRIDDED DATA HERE:**
-***
-**Precipitation data [here](https://mco.cfc.umt.edu/datasets/data/precipitation/)**
 
-**Temperature data [here](https://mco.cfc.umt.edu/datasets/data/temperature/)**
-</div>
+Row {.tabset .tabset-fade data-height=1600}
+-------------------------------------
 
-<style>
-div.green { background-color:#e6ffea; border-radius: 5px; padding: 20px;}
-</style>
-<div class = "green">
-#### 	**DOWNLOAD TIME SERIES DATA HERE:**
-***
-**Precipitation data [here](https://montana-climate-office-hoylman.shinyapps.io/get_precip/)**
+### **Precipitation Maps**
 
-</div>
+<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://mco.cfc.umt.edu/datasets/maps/precip_map.html" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+
+### **Temperature Maps**
+
+<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://mco.cfc.umt.edu/datasets/maps/temp_map.html" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+
+### **Phenology Maps**
+
+<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://mco.cfc.umt.edu/datasets/maps/GDD_map.html" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+
+### **Mesonet Map**
+
+<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://mesonet.climate.umt.edu/map" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+
 ###
 
  <font size="1">
