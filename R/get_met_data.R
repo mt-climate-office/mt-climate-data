@@ -16,6 +16,7 @@ input_options = data.frame(urls = c("http://thredds.northwestknowledge.net:8080/
                            units = c("mm", "°C", "kPa"),
                            short_name = c("precip", "max_temp", "vpd"))
 
+#to dos!
 #start time, end time
 
 get_met_data = function(lat_in, lon_in, i){
