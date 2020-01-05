@@ -113,11 +113,6 @@ shinyApp(ui <- fluidPage(
   verticalLayout(),
   # first we want to display the map
   leafletOutput("mymap", height = 600),
-  helpText("Welcome to the Montana Climate Office, time series download tool. This app will allow you to download
-           data from the gridMET dataset (Abatzoglou, 2013). Choose a variable from the dropdown menu below the map
-           and drop a pin on the map within the Continental United States. Once complete you can downlaod the data
-           in csv format below using the download buttons. These data are available in daily or monthly timesteps.
-           For any questions please contact state.climatologist@umontana.edu."),
   selectInput("variable", "Choose a Variable:",
               #cant figure out how to soft code this.....
               c("Precipitation" = 1,
