@@ -45,7 +45,7 @@ div.green { background-color:#e6ffea; border-radius: 5px; padding: 20px;}
 ### 	**DOWNLOAD TIME SERIES DATA HERE:**
 </center>
 ***
-**Precipitation data [here](https://montana-climate-office-hoylman.shinyapps.io/get_precip/)**
+**Time Series Download App [here](http://mco.cfc.umt.edu/datasets/timeseries_app/timeseries_app.html)**
 
 **Mesonet API [here](https://mesonet.climate.umt.edu/api/)**
 
