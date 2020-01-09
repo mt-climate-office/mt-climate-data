@@ -66,21 +66,9 @@ The Montana Climate Office is committed to serving Montanans with up-to-date, ea
 Row {.tabset .tabset-fade data-height=1600}
 -------------------------------------
 
-### **Precipitation**
+### **Climate Explorer**
 
-<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://zhoylman.users.earthengine.app/view/mtprecip" webkitallowfullscreen="webkitallowfullscreen" style="position: relative; top: -60px"></iframe>
-
-### **Temperature**
-
-<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://zhoylman.users.earthengine.app/view/mttemp" webkitallowfullscreen="webkitallowfullscreen" style="position: relative; top: -60px"></iframe>
-
-### **Net Primary Productivity**
-
-<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://zhoylman.users.earthengine.app/view/mtnpp" webkitallowfullscreen="webkitallowfullscreen" style="position: relative; top: -60px"></iframe>
-
-### **Phenology**
-
-<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://mco.cfc.umt.edu/datasets/maps/GDD_map.html" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+<iframe width="100%" height="100%" allowfullscreen="allowfullscreen" allowvr="yes" frameborder="0" mozallowfullscreen="mozallowfullscreen" scrolling="no" src="https://zhoylman.users.earthengine.app/view/mtclimate" webkitallowfullscreen="webkitallowfullscreen" style="position: relative; top: -60px"></iframe>
 
 ###
 
