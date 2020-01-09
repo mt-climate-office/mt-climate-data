@@ -44,3 +44,9 @@ days_above_90 = brick(days_above_90)
 days_above_90 = mask(days_above_90, sf::read_sf("/home/zhoylman/mt-climate-data/shp/states/states.shp")%>%dplyr::filter(STATE_ABBR == "MT"))
 writeRaster(days_above_90,"/home/zhoylman/mt-climate-data/ee_data/days_above_90F.tif")
 
+GGD = list.files("/home/zhoylman/mt-climate-data/data/growing_degree_days/base_50_degrees_F/", full.names = T)%>%
+  lapply(.,raster)
+GGD[[41]] = NULL
+GGD = brick(GGD)
+GGD = mask(GGD, sf::read_sf("/home/zhoylman/mt-climate-data/shp/states/states.shp")%>%dplyr::filter(STATE_ABBR == "MT"))
+writeRaster(GGD,"/home/zhoylman/mt-climate-data/ee_data/Growing_Degree_Days.tif")
