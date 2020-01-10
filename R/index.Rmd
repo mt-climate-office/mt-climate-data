@@ -11,6 +11,17 @@ output:
     includes:
       after_body: footer.html
 ---
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-149859729-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-149859729-2');
+</script>
+</head> 
 
 Inputs {.sidebar data-width=350}
 -------------------------------------
@@ -29,13 +40,10 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </center>
 
 ***
-**Precipitation data [here](https://mco.cfc.umt.edu/datasets/data/precipitation/)**
+**Climate data [here](https://mco.cfc.umt.edu/datasets/data/climate/)**
 
-**Temperature data [here](https://mco.cfc.umt.edu/datasets/data/temperature/)**
+**Vegetation data [here](https://mco.cfc.umt.edu/datasets/data/vegitation/)**
 
-**Net Prmary Productivity data [here](https://mco.cfc.umt.edu/datasets/data/net_primary_productivity/)**
-
-**Phenology data [here](https://mco.cfc.umt.edu/datasets/data/growing_degree_days/)**
 </div>
 
 <style>
