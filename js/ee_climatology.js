@@ -1,3 +1,5 @@
+// This script is to replace R workflow so that it is faster and scaleable. 
+
 //Define the years of interest
 var years = [];
 for (var i = 1979; i <= 2019; i++) {
