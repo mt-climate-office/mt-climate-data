@@ -1,3 +1,6 @@
+# gross script just meant to quickly get the rater stacks ready for 
+# ee app
+
 library(raster)
 library(dplyr)
 library(spdplyr)
