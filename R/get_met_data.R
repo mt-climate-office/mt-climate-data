@@ -156,7 +156,7 @@ server <- function(input, output, session) {
       # this is the base map  
       leaflet::addProviderTiles("Stamen.Toner") %>%
       # terrain tiles
-      leaflet::addTiles("https://maps.tilehosting.com/data/hillshades/{z}/{x}/{y}.png?key=KZO7rAv96Alr8UVUrd4a") %>%
+      leaflet::addTiles("https://api.maptiler.com/tiles/hillshades/{z}/{x}/{y}.png?key=KZO7rAv96Alr8UVUrd4a") %>%
       # lines and labels
       leaflet::addProviderTiles("Stamen.TonerLines") %>%
       leaflet::addProviderTiles("Stamen.TonerLabels") %>%
