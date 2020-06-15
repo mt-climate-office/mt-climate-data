@@ -7,10 +7,10 @@ library(spdplyr)
 library(doParallel)
 
 #define write dir
-write.dir = "~/mt-climate-data/data/growing_degree_days/base_50_degrees_F/"
+write.dir = "~/mt-climate-data/data/atlas_datasets/growing_degree_days/base_50_degrees_F/"
 
 #import states shp file for clipping
-mt = read_sf("~/mt-climate-data/shp/states/states.shp")%>%
+mt = read_sf("~/mt-climate-data/data/shp/states/states.shp")%>%
   filter(STATE_ABBR == "MT")
 
 #import minimum daily temp from gridMET and clip to MT (Abatzoglou, 2013)

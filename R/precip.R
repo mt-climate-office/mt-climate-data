@@ -7,10 +7,10 @@ library(spdplyr)
 library(doParallel)
 
 #define write directory
-write.dir = "~/mt-climate-data/data/precipitation/annual_precipitation/"
+write.dir = "~/mt-climate-data/data/atlas_datasets/precipitation/annual_precipitation/"
 
 #import state shp file for clipping
-mt = read_sf("~/mt-climate-data/shp/states/states.shp")%>%
+mt = read_sf("~/mt-climate-data/data/shp/states/states.shp")%>%
   filter(STATE_ABBR == "MT")
 
 #import gridMET precip and mask to MT (Abatzoglou, 2013)
